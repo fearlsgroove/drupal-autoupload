@@ -4,10 +4,3 @@
  * @file
  *   Allows users to upload files without clicking the upload button
  */
-
-/**
- * Implementation of hook_init().
- */
-function autoupload_init() {
-  drupal_add_js(drupal_get_path('module', 'autoupload') . '/js/autoupload.js');
-}
