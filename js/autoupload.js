@@ -8,7 +8,7 @@
       $('.form-item input.form-submit[value=Upload]', context).hide();
       $('.form-item input.form-file', context).change(function() {
         $parent = $(this).closest('.form-item');
-        
+
         //setTimeout to allow for validation
         //would prefer an event, but there isn't one
         setTimeout(function() {
