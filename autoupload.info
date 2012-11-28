@@ -1,5 +1,5 @@
 name = AutoUpload
-description = Automatically upload a file after it's selecting without needing to push the Upload button
+description = Automatically upload a file without needing to push the upload button
 core = 7.x
 
 scripts[] = js/autoupload.js
