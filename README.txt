@@ -8,4 +8,4 @@ This module removes the extra button press and hides the "Upload" button
 via JavaScript for a quicker file upload UI. When JavaScript is not
 enabled, it falls back to the "Upload" button.
 
-Developed by RMR Labz.
+Developed by RMR Labz (http://www.rmrlabz.com).
