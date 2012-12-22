@@ -4,3 +4,49 @@
  * @file
  * Allows users to upload files without clicking the upload button
  */
+
+/*
+ * implements hook_menu().
+ */
+function autoupload_menu() {
+  $items['admin/config/media/autoupload'] = array(
+    'title'            => 'Auto Upload settings',
+    'description'      => 'Configure the file fields which should use Auto Upload',
+    'page callback'    => 'drupal_get_form',
+    'page arguments'   => array('autoupload_admin_form'),
+    'access arguments' => array('administer autoupload'),
+    'file'             => 'autoupload.admin.inc',
+    'weight'           => 20,
+  );
+  return $items;
+}
+
+/*
+ * implements hook_permission().
+ */
+function autoupload_permission() {
+  return array(
+    'administer autoupload' => array(
+      'title' => 'Administer the Auto Upload settings',
+    ),
+  );
+}
+
+/*
+ * implements hook_init().
+ */
+function autoupload_init() {
+  /*
+   * Add the JavaScript settings
+   *   selectors: array of element selectors and settings
+   *   predefined enabled: array.
+   *     key: name of predefined file type
+   *     value: 0/1 indicator whether predefined type is enabled
+   */
+  $autoupload_settings = array(
+    'selectors' => variable_get('autoupload_selectors'),
+    'predefined' => variable_get('autoupload_predefined'),
+  );
+
+  drupal_add_js(array('autoupload' => $autoupload_settings), 'setting');
+}

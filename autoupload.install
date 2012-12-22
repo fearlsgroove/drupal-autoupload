@@ -1,0 +1,62 @@
+<?php
+
+/**
+ * @file
+ *
+ * Install, update, and uninstall functions of the AutoUpload module
+ */
+
+/**
+ * Implements hook_install().
+ */
+function autoupload_install() {
+  include('autoupload.admin.inc');
+
+  $media_enabled = module_exists('media') ? 1 : 0;
+  $predefined = array(
+    'managed_file' => 1,
+    'media' => $media_enabled,
+    'media_library' => $media_enabled,
+  );
+  $selectors = array();
+  foreach ($predefined as $type => $is_enabled) {
+    if ($is_enabled) {
+      $selectors[] = _autoupload_get_predefined($type);
+    }
+  }
+
+  variable_set('autoupload_selectors', $selectors);
+  variable_set('autoupload_predefined', $predefined);
+}
+
+/**
+ * Implements hook_uninstall().
+ */
+function autoupload_uninstall() {
+  variable_del('autoupload_selectors');
+  variable_del('autoupload_predefined');
+}
+
+/**
+ * 7.x-2.0 update. Supports multiple field types.
+ * Store field types to auto upload as a variable in the database
+ */
+function autoupload_update_720() {
+  include('autoupload.admin.inc');
+
+  $media_enabled = module_exists('media') ? 1 : 0;
+  $predefined = array(
+    'managed_file' => 1,
+    'media' => $media_enabled,
+    'media_library' => $media_enabled,
+  );
+  $selectors = array();
+  foreach ($predefined as $type => $is_enabled) {
+    if ($is_enabled) {
+      $selectors[] = _autoupload_get_predefined($type);
+    }
+  }
+
+  variable_set('autoupload_selectors', $selectors);
+  variable_set('autoupload_predefined', $predefined);
+}
