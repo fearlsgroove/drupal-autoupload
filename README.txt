@@ -9,3 +9,10 @@ via JavaScript for a quicker file upload UI. When JavaScript is not
 enabled, it falls back to the "Upload" button.
 
 Developed by RMR Labz (http://www.rmrlabz.com).
+
+==================
+
+Handles the core managed file fields and Media module file fields.
+
+Configure the type of file fields you want to use auto upload at
+admin/config/media/autoupload.
