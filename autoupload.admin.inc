@@ -52,7 +52,7 @@ function autoupload_admin_form() {
 }
 
 /**
- * Submit handler for autoupload settings form
+ * Submit handler for autoupload settings form.
  */
 function autoupload_admin_form_submit($form, &$form_state) {
   $selectors = $predefined = array();
@@ -72,7 +72,7 @@ function autoupload_admin_form_submit($form, &$form_state) {
 }
 
 /**
- * Admin helper function to return the predefined file field types
+ * Admin helper function to return the predefined file field types.
  *
  * The $types array data is passed to the autoUpload JavaScript var selectors
  *   index : type of file handled
