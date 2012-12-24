@@ -8,6 +8,9 @@
  * settings form.
  */
 
+/*
+ * Form builder for the autoupload settings page.
+ */
 function autoupload_admin_form() {
   $autoupload_predefined = variable_get('autoupload_predefined');
 
@@ -29,7 +32,7 @@ function autoupload_admin_form() {
   $form['predefined']['media'] = array(
     '#type' => 'checkbox',
     '#title' => t('Media'),
-    '#description' => t('Auto upload files using the Media module\'s media file selector.'),
+    '#description' => t('Auto upload files using the Media module media file selector.'),
     '#disabled' => $media_disabled,
     '#default_value' => $media_disabled ? 0 : $autoupload_predefined['media'],
   );
@@ -48,6 +51,9 @@ function autoupload_admin_form() {
   return $form;
 }
 
+/*
+ * Submit handler for autoupload settings form
+ */
 function autoupload_admin_form_submit($form, &$form_state) {
   $selectors = $predefined = array();
   $values = $form_state['values'];
