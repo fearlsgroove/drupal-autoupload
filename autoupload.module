@@ -47,6 +47,7 @@ function autoupload_init() {
     'selectors' => variable_get('autoupload_selectors'),
     'predefined' => variable_get('autoupload_predefined'),
   );
+  array_walk_recursive($autoupload_settings, 'check_plain');
 
   drupal_add_js(array('autoupload' => $autoupload_settings), 'setting');
 }
