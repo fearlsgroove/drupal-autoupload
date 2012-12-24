@@ -38,10 +38,10 @@ function autoupload_uninstall() {
 }
 
 /**
- * 7.x-2.0 update. Supports multiple field types.
+ * 7.x-1.1 update. Supports multiple field types.
  * Store field types to auto upload as a variable in the database
  */
-function autoupload_update_720() {
+function autoupload_update_711() {
   include('autoupload.admin.inc');
 
   $media_enabled = module_exists('media') ? 1 : 0;
