@@ -5,7 +5,7 @@
  * Allows users to upload files without clicking the upload button
  */
 
-/*
+/**
  * implements hook_menu().
  */
 function autoupload_menu() {
@@ -21,7 +21,7 @@ function autoupload_menu() {
   return $items;
 }
 
-/*
+/**
  * implements hook_permission().
  */
 function autoupload_permission() {
@@ -32,7 +32,7 @@ function autoupload_permission() {
   );
 }
 
-/*
+/**
  * implements hook_init().
  */
 function autoupload_init() {

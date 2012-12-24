@@ -2,7 +2,6 @@
 
 /**
  * @file
- *
  * Install, update, and uninstall functions of the AutoUpload module
  */
 
@@ -10,7 +9,7 @@
  * Implements hook_install().
  */
 function autoupload_install() {
-  include('autoupload.admin.inc');
+  require_once 'autoupload.admin.inc';
 
   $media_enabled = module_exists('media') ? 1 : 0;
   $predefined = array(
@@ -38,11 +37,10 @@ function autoupload_uninstall() {
 }
 
 /**
- * 7.x-1.1 update. Supports multiple field types.
- * Store field types to auto upload as a variable in the database
+ * Support multiple field types. Store as a variable in database.
  */
 function autoupload_update_711() {
-  include('autoupload.admin.inc');
+  require_once 'autoupload.admin.inc';
 
   $media_enabled = module_exists('media') ? 1 : 0;
   $predefined = array(

@@ -5,7 +5,7 @@
 (function ($) {
   Drupal.behaviors.autoUpload = {
     attach: function (context, settings) {
-      /*
+      /**
        * selectors is an associative array. for more info, see
        * _autoupload_get_predefined in autoupload.admin.inc
        */
@@ -22,7 +22,7 @@
           var error = value['error'];
           var error_remove = value['error_remove'];
 
-          /*
+          /**
            * add CSS to the document instead of .hide(), because the element
            * may be added dynamically after this point. cannot delegate "load"
            */
@@ -69,7 +69,7 @@
         });
       });
 
-      /*
+      /**
        * Media module's cancel button is added after load, so delay for a
        * moment then resize the media browser so the cancel button is visible
        */
