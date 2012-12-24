@@ -6,7 +6,7 @@
  */
 
 /**
- * implements hook_menu().
+ * Implements hook_menu().
  */
 function autoupload_menu() {
   $items['admin/config/media/autoupload'] = array(
@@ -22,7 +22,7 @@ function autoupload_menu() {
 }
 
 /**
- * implements hook_permission().
+ * Implements hook_permission().
  */
 function autoupload_permission() {
   return array(
@@ -33,7 +33,7 @@ function autoupload_permission() {
 }
 
 /**
- * implements hook_init().
+ * Implements hook_init().
  */
 function autoupload_init() {
   /*
