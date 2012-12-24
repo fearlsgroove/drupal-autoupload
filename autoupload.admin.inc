@@ -8,7 +8,7 @@
  * settings form.
  */
 
-/*
+/**
  * Form builder for the autoupload settings page.
  */
 function autoupload_admin_form() {
@@ -51,7 +51,7 @@ function autoupload_admin_form() {
   return $form;
 }
 
-/*
+/**
  * Submit handler for autoupload settings form
  */
 function autoupload_admin_form_submit($form, &$form_state) {
@@ -71,7 +71,7 @@ function autoupload_admin_form_submit($form, &$form_state) {
   drupal_set_message(t('The configuration options have been saved.'));
 }
 
-/*
+/**
  * Admin helper function to return the predefined file field types
  *
  * The $types array data is passed to the autoUpload JavaScript var selectors
