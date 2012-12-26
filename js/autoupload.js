@@ -11,9 +11,23 @@
        */
       var selectors = settings.autoupload.selectors;
 
+      /**
+       * Add CSS to the document instead of .hide(), because the element
+       * may be added dynamically after this point. Cannot delegate "load"
+       * Cannot add a class to the element to hide it.
+       */
+      $('head').once(function() {
+        //Can't use map() on obj. Core jQuery is only 1.4.4. Requires 1.6.
+        var selector = [];
+        $.each( selectors, function( index, value ) {
+          selector.push( value['context'] + ' ' + value['submit_input'] );
+        });
+        $(this).append($('<' + 'style media="all" type="text/css"' + '>' + selector.join(', ') + ' { display:none; }<' + '/style' + '>'));
+      });
+
       $.each(selectors, function (index, value) {
         var fs_context = value['context'];
-        $(fs_context, context).each(function () {
+        $(fs_context, context).once(function () {
           var $wrapper = $(this);
           var file_input = value['file_input'];
           var file_event = value['file_event'];
@@ -21,12 +35,6 @@
           var submit_event = value['submit_event'];
           var error = value['error'];
           var error_remove = value['error_remove'];
-
-          /**
-           * add CSS to the document instead of .hide(), because the element
-           * may be added dynamically after this point. cannot delegate "load"
-           */
-          $('head').append($('<' + 'style media="all" type="text/css"' + '>' + fs_context + ' ' + submit_input + ' { display:none; }<' + '/style' + '>'));
 
           $wrapper.delegate(file_input, file_event, function (e) {
             if (!error || $(this).hasClass('autoupload-processed')) {
@@ -43,23 +51,26 @@
               //perform error check
               e.preventDefault();
 
-              if (!error_remove) {
-                //error removal is handled already. no need to do anything
-              }
-              if (error_remove == 'id') {
-                var elem_id = error.substr(error.lastIndexOf('#') + 1);
-                if (!/[: .[]+/.test(elem_class)) {
-                  $wrapper.find(error).removeAttr(elem_id);
-                }
-              }
-              else if (error_remove == 'class') {
-                var elem_class = error.substr(error.lastIndexOf('.') + 1);
-                if (!/[: #[]+/.test(elem_class)) {
-                  $wrapper.find(error).removeClass(elem_class);
-                }
-              }
-              else if (error_remove == 'element') {
-                $wrapper.find(error).remove();
+              switch(error_remove) {
+                case null:
+                case '':
+                  //error remove is handled already. do nothing
+                  break;
+                case 'id':
+                  var elem_id = error.substr(error.lastIndexOf('#') + 1);
+                  if (!/[: .[]+/.test(elem_class)) {
+                    $wrapper.find(error).removeAttr(elem_id);
+                  }
+                  break;
+                case 'class':
+                  var elem_class = error.substr(error.lastIndexOf('.') + 1);
+                  if (!/[: #[]+/.test(elem_class)) {
+                    $wrapper.find(error).removeClass(elem_class);
+                  }
+                  break;
+                case 'element':
+                  $wrapper.find(error).remove();
+                  break;
               }
 
               $(this).addClass('autoupload-processed');
