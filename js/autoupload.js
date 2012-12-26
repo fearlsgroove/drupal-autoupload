@@ -57,10 +57,7 @@
                   //error remove is handled already. do nothing
                   break;
                 case 'id':
-                  var elem_id = error.substr(error.lastIndexOf('#') + 1);
-                  if (!/[: .[]+/.test(elem_class)) {
-                    $wrapper.find(error).removeAttr(elem_id);
-                  }
+                    $wrapper.find(error).removeAttr('id');
                   break;
                 case 'class':
                   var elem_class = error.substr(error.lastIndexOf('.') + 1);
