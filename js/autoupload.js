@@ -59,18 +59,22 @@
                 case '':
                   //error remove is handled already. do nothing
                   break;
+
                 case 'id':
                     $wrapper.find(error).removeAttr('id');
                   break;
+
                 case 'class':
                   var elem_class = error.substr(error.lastIndexOf('.') + 1);
                   if (!/[: #[]+/.test(elem_class)) {
                     $wrapper.find(error).removeClass(elem_class);
                   }
                   break;
+
                 case 'element':
                   $wrapper.find(error).remove();
                   break;
+
               }
 
               $(this).addClass('autoupload-processed');

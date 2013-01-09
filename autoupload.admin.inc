@@ -205,7 +205,7 @@ function theme_autoupload_custom($variables) {
         array(
           'data' => drupal_render($form[$key]['delete']),
           'class' => 'autoupload-custom-delete',
-        )
+        ),
       ),
     );
     // Add attributes from the element to the row, such as ahah class.
