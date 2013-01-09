@@ -10,6 +10,9 @@
        * _autoupload_get_predefined in autoupload.admin.inc
        */
       var selectors = settings.autoupload.selectors;
+      if (!selectors) {
+        return;
+      }
 
       /**
        * Add CSS to the document instead of .hide(), because the element

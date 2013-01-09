@@ -17,14 +17,8 @@ function autoupload_install() {
     'media' => $media_enabled,
     'media_library' => $media_enabled,
   );
-  $selectors = array();
-  foreach ($predefined as $type => $is_enabled) {
-    if ($is_enabled) {
-      $selectors[] = _autoupload_get_predefined($type);
-    }
-  }
 
-  variable_set('autoupload_selectors', $selectors);
+  variable_set('autoupload_userdefined', NULL);
   variable_set('autoupload_predefined', $predefined);
 }
 
@@ -32,29 +26,24 @@ function autoupload_install() {
  * Implements hook_uninstall().
  */
 function autoupload_uninstall() {
-  variable_del('autoupload_selectors');
+  variable_del('autoupload_userdefined');
+  variable_del('autoupload_userdefined_disabled');
   variable_del('autoupload_predefined');
 }
 
 /**
  * Support multiple field types. Store as a variable in database.
  */
-function autoupload_update_711() {
-  require_once 'autoupload.admin.inc';
-
+function autoupload_update_7101() {
+  variable_del('autoupload_selectors');
+  
   $media_enabled = module_exists('media') ? 1 : 0;
   $predefined = array(
     'managed_file' => 1,
     'media' => $media_enabled,
     'media_library' => $media_enabled,
   );
-  $selectors = array();
-  foreach ($predefined as $type => $is_enabled) {
-    if ($is_enabled) {
-      $selectors[] = _autoupload_get_predefined($type);
-    }
-  }
-
-  variable_set('autoupload_selectors', $selectors);
+ 
+  variable_set('autoupload_userdefined', NULL);
   variable_set('autoupload_predefined', $predefined);
 }
