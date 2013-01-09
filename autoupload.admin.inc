@@ -66,20 +66,20 @@ function autoupload_admin_form($form, $form_state) {
   //get count of how many custom types there are
   $count = isset($form_state['custom_count']) ? $form_state['custom_count'] : count($settings_userdefined);
   $index = 0;
-  foreach((array) $settings_userdefined as $key => $value) {
+  foreach ((array) $settings_userdefined as $key => $value) {
     $form['custom']['custom_type'][$index] = autoupload_custom_combo($index, TRUE, $key, $value);
     $index++;
   }
 
   $settings_userdefined_disabled = variable_get('autoupload_userdefined_disabled');
   $count += count($settings_userdefined_disabled);
-  foreach((array) $settings_userdefined_disabled as $key => $value) {
+  foreach ((array) $settings_userdefined_disabled as $key => $value) {
     $form['custom']['custom_type'][$index] = autoupload_custom_combo($index, FALSE, $key, $value);
     $index++;
   }
 
   $count++;
-  for($index; $index < $count; $index++) {
+  for ($index; $index < $count; $index++) {
     $form['custom']['custom_type'][$index] = autoupload_custom_combo($index);
   }
 
@@ -250,12 +250,12 @@ function autoupload_admin_form_validate($form, &$form_state) {
   //make sure machine name is unique
   $values = $form_state['values'];
   $names = array();
-  foreach($values['custom_type'] as $key => $value) {
-    if($value['name'] == '' && $value['context'] == '' && $value['file_input'] == '' && $value['file_event'] == '' && $value['submit_input'] == '' && $value['submit_event'] == '' && $value['error'] == '') {
+  foreach ($values['custom_type'] as $key => $value) {
+    if ($value['name'] == '' && $value['context'] == '' && $value['file_input'] == '' && $value['file_event'] == '' && $value['submit_input'] == '' && $value['submit_event'] == '' && $value['error'] == '') {
       continue;
     }
     //make sure machine names are unique
-    if(in_array($value['name'], $names)) {
+    if (in_array($value['name'], $names)) {
       form_set_error('custom_type][' . $key . '][name', t('Name %name is already used. Please enter a unique name for each configuration.', array('%name' => $value['name'])));
     }
     else {
@@ -263,26 +263,26 @@ function autoupload_admin_form_validate($form, &$form_state) {
     }
 
     //make sure names are only letters, numbers, and underscores
-    if(preg_match('/[^a-zA-Z0-9_]/', $value['name']) !== 0) {
+    if (preg_match('/[^a-zA-Z0-9_]/', $value['name']) !== 0) {
       form_set_error('custom_type][' . $key . '][name', t('Name %name is invalid. Only letters, numbers, and underscores allowed.', array('%name' => $value['name'])));
     }
 
-    if($value['name'] == '') {
+    if ($value['name'] == '') {
       form_set_error('custom_type][' . $key . '][name', t('Name cannot be empty.'));
     }
-    if($value['context'] == '') {
+    if ($value['context'] == '') {
       form_set_error('custom_type][' . $key . '][context', t('Context cannot be empty.'));
     }
-    if($value['file_input'] == '') {
+    if ($value['file_input'] == '') {
       form_set_error('custom_type][' . $key . '][file_input', t('File input selector cannot be empty.'));
     }
-    if($value['file_event'] == '') {
+    if ($value['file_event'] == '') {
       form_set_error('custom_type][' . $key . '][file_event', t('File event cannot be empty.'));
     }
-    if($value['submit_input'] == '') {
+    if ($value['submit_input'] == '') {
       form_set_error('custom_type][' . $key . '][submit_input', t('Submit input selector cannot be empty.'));
     }
-    if($value['submit_event'] == '') {
+    if ($value['submit_event'] == '') {
       form_set_error('custom_type][' . $key . '][submit_event', t('Submit event cannot be empty.'));
     }
   }
@@ -300,14 +300,14 @@ function autoupload_admin_form_submit($form, &$form_state) {
     $settings_predefined[$type] = $values[$type];
   }
 
-  foreach($values['custom_type'] as $value) {
-    if($value['name'] == '' || $value['delete'] == TRUE) {
+  foreach ($values['custom_type'] as $value) {
+    if ($value['name'] == '' || $value['delete'] == TRUE) {
       continue;
     }
     $enabled = $value['enabled'];
     $name = $value['name'];
     unset($value['name'], $value['enabled']);
-    if($enabled) {
+    if ($enabled) {
       $settings_userdefined[$name] = $value;
     }
     else {
