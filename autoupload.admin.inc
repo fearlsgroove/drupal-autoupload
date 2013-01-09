@@ -63,7 +63,7 @@ function autoupload_admin_form($form, $form_state) {
 
   $settings_userdefined = variable_get('autoupload_userdefined');
 
-  //get count of how many custom types there are
+  // Get count of how many custom types there are.
   $count = isset($form_state['custom_count']) ? $form_state['custom_count'] : count($settings_userdefined);
   $index = 0;
   foreach ((array) $settings_userdefined as $key => $value) {
@@ -111,7 +111,7 @@ function autoupload_custom_combo($delta = 0, $enabled = NULL, $name = '', $setti
   $form['#tree'] = TRUE;
   $form['enabled'] = array(
     '#type' => 'checkbox',
-    '#default_value' => $enabled === NULL ? TRUE: $enabled,
+    '#default_value' => $enabled === NULL ? TRUE : $enabled,
   );
   $form['name'] = array(
     '#type' => 'textfield',
@@ -185,11 +185,11 @@ function theme_autoupload_custom($variables) {
       'data' => array(
         array(
           'data' => drupal_render($form[$key]['enabled']),
-          'class' => 'autoupload-custom-enabled'
+          'class' => 'autoupload-custom-enabled',
         ),
         array(
           'data' => drupal_render($form[$key]['name']),
-          'class' => 'autoupload-custom-name'
+          'class' => 'autoupload-custom-name',
         ),
         array(
           'data' =>
@@ -200,7 +200,7 @@ function theme_autoupload_custom($variables) {
             drupal_render($form[$key]['submit_event']) .
             drupal_render($form[$key]['error']) .
             drupal_render($form[$key]['error_remove']),
-          'class' => 'autoupload-custom-configuration'
+          'class' => 'autoupload-custom-configuration',
         ),
         array(
           'data' => drupal_render($form[$key]['delete']),
@@ -247,14 +247,13 @@ function autoupload_custom_more_submit($form, &$form_state) {
  * Validation handler for autoupload settings form.
  */
 function autoupload_admin_form_validate($form, &$form_state) {
-  //make sure machine name is unique
   $values = $form_state['values'];
   $names = array();
   foreach ($values['custom_type'] as $key => $value) {
     if ($value['name'] == '' && $value['context'] == '' && $value['file_input'] == '' && $value['file_event'] == '' && $value['submit_input'] == '' && $value['submit_event'] == '' && $value['error'] == '') {
       continue;
     }
-    //make sure machine names are unique
+    // Make sure machine names are unique.
     if (in_array($value['name'], $names)) {
       form_set_error('custom_type][' . $key . '][name', t('Name %name is already used. Please enter a unique name for each configuration.', array('%name' => $value['name'])));
     }
@@ -262,7 +261,7 @@ function autoupload_admin_form_validate($form, &$form_state) {
       $names[] = $value['name'];
     }
 
-    //make sure names are only letters, numbers, and underscores
+    // Make sure names are only letters, numbers, and underscores.
     if (preg_match('/[^a-zA-Z0-9_]/', $value['name']) !== 0) {
       form_set_error('custom_type][' . $key . '][name', t('Name %name is invalid. Only letters, numbers, and underscores allowed.', array('%name' => $value['name'])));
     }

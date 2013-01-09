@@ -36,14 +36,14 @@ function autoupload_uninstall() {
  */
 function autoupload_update_7101() {
   variable_del('autoupload_selectors');
-  
+
   $media_enabled = module_exists('media') ? 1 : 0;
   $predefined = array(
     'managed_file' => 1,
     'media' => $media_enabled,
     'media_library' => $media_enabled,
   );
- 
+
   variable_set('autoupload_userdefined', NULL);
   variable_set('autoupload_predefined', $predefined);
 }

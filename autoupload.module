@@ -89,12 +89,13 @@ function autoupload_theme() {
  * Implements hook_help().
  */
 function autoupload_help($path, $arg) {
-   switch ($path) {
+  switch ($path) {
     case 'admin/help#autoupload':
       $output = file_get_contents(dirname(__FILE__) . '/README.txt');
       return module_exists('markdown') ? filter_xss_admin(module_invoke('markdown', 'filter', 'process', 0, -1, $output)) : '<pre>' . check_plain($output) . '</pre>';
       break;
- }
+
+  }
 }
 
 /**
