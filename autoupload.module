@@ -51,8 +51,8 @@ function autoupload_form_alter(&$form, &$form_state, $form_id) {
    *     value: 0/1 indicator whether predefined type is enabled
    */
 
-  $settings_userdefined = variable_get('autoupload_userdefined');
-  $settings_predefined = variable_get('autoupload_predefined');
+  $settings_userdefined = variable_get('autoupload_userdefined', array());
+  $settings_predefined = variable_get('autoupload_predefined', array());
 
   $selectors = array();
   $predefined_types = _autoupload_get_predefined();
@@ -119,7 +119,7 @@ function _autoupload_get_predefined($type = NULL) {
       'context' => 'div.form-managed-file',
       'file_input' => 'input.form-file',
       'file_event' => 'change',
-      'submit_input' => 'input.form-submit[value=Upload]',
+      'submit_input' => '.form-submit[value=Upload]',
       'submit_event' => 'mousedown',
       'error' => 'div.error',
       'error_remove' => '',
